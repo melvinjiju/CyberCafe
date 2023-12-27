@@ -1,10 +1,10 @@
-This is our DBMS Mini Project about CyberCafe Management System
-Front-end is implemented using HTML and CSS, and back-end is using Flask and MySQL
+This is our DBMS Mini Project about CyberCafe Management System.
+Front-end is implemented using HTML and CSS, and back-end is using Flask and MySQL.
 
 To launch the server, just run the app.py
 
-Four MySQL table are needed : auth_table, billing_table, sys_table and user_table
-A connector called flask_mysqldb is used to link backend and database
+Four MySQL table are needed : auth_table, billing_table, sys_table and user_table. 
+A connector called flask_mysqldb is used to link backend and database.
 
 Functionalities provided are : 
 1) User signup
