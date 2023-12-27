@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank you, User</title>
+</head>
+<body background="/static/images/abcd.jpg" style="background-size: cover;">
+	<br><br><br><br><br><br><br>
+<div class="form-container" style="margin: auto;">
+	<p class="title">Thank you, {{data}}</p>
+	<center>
+   
+     <p><h1>{{cost}}</h1></p>
+    
+    <a href="{{ url_for('home') }}"><button class ="sign" id="stopButton" type="submit" href>Go to Home</button></a>
+    
+	
+	</center>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+  
+    <!-- Add any additional styling or links to CSS here -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        button{
+
+            color: #007bff;
+            text-align: center;
+        
+        }
+
+        .customer-details {
+            max-width: 600px;
+            text-align: center;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #dee2e6;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" id="home" href="{{ url_for('dashboard')}}">Home</a>
+                <a class="nav-item nav-link" id="logout" href="{{ url_for('admin_logout')}}" style="color: crimson;"">Logout</a>
+                </div>
+        </div>
+    </nav>
+    <h1>Customer Details</h1>
+
+    <div class="customer-details">
+        <form action="/update_form" method="POST">
+        <table>
+            <tr>
+                <th>Customer ID</th>
+                <td>{{customer[0]}}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="name" value="{{customer[1]}}"></td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td><input type="text" name="age" value="{{customer[2]}}"></td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td><input type="text" name="gender" value="{{customer[4]}}"></td>
+            </tr>
+            <tr>
+                <th>Contact Number</th>
+                <td><input type="text" name="contact" value="{{customer[3]}}"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+
+    <!-- Add any additional content or styling as needed -->
+
+</body>
+</html>

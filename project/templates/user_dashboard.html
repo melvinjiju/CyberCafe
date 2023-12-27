@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome User</title>
+	<script>
+		// Timer variables
+		let seconds = 0;
+		let minutes = 0;
+		let hours = 0;
+		let sec = 0;
+		// Update the timer every second
+		timerInterval = setInterval(updateTimer, 1000);
+		
+		function updateTimer() {
+			seconds++;
+			sec++;
+			if (seconds === 60) {
+				seconds = 0;
+				minutes++;
+	
+				if (minutes === 60) {
+					minutes = 0;
+					hours++;
+				}
+			}
+
+			// Format the timer display
+			const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+	
+			// Update the HTML content
+			document.getElementById('timer').innerText = formattedTime;
+            document.getElementById('timerInput').value = sec;
+        }
+	
+		// Helper function to pad single-digit numbers with a leading zero
+		function pad(number) {
+			return (number < 10) ? '0' + number : number;
+		}
+		function stopTimer() {
+        clearInterval(timerInterval);
+    }
+	</script>
+	
+</head>
+<body background="/static/images/abcd.jpg" style="background-size: cover;">
+	<br><br><br><br><br><br><br>
+<div class="form-container" style="margin: auto;">
+	<p class="title">Welcome, {{data}}</p>
+	<center>
+	<img src="/static/images/tick.svg">
+	<div id="timer">00:00:00</div>
+    <form action="/logout" method="post">
+        <input type="hidden" name="timerValue" id="timerInput">
+        <button class ="sign" id="stopButton" onclick="stopTimer()" type="submit">Log Out</button>
+    </form>
+	<p><h1>{{cost}}</h1></p>
+	</center>
+
+</div>
+</body>
+</html>
+

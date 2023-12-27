@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body background="/static/images/abcd.jpg" style="background-size: cover;">
+	<br><br><br><br><br><br><br>
+<div class="form-container" style="margin: auto;">
+	<p class="title">CyberCafe Login</p>
+	<form class="form" action="/login" method="post">
+		<div class="input-group">
+			<label for="username">Username</label>
+			<input type="text" name="username" id="username" placeholder="" required>
+		</div>
+		<div class="input-group">
+			<label for="password">Password</label>
+			<input type="password" name="password" id="password" placeholder="" required>
+			
+		</div>
+		<div class="input-group">
+			<label for="username">System Number</label>
+			<input type="text" name="sys_id" id="sys_id" placeholder="" required>
+		</div>
+		<button class="sign">Sign in</button>
+	</form>
+	
+	<p class="signup">Don't have an account?
+		<a rel="noopener noreferrer" href="{{ url_for('signup') }}" class="">Sign up</a>
+	</p>
+	<p style="text-align: center; color: aqua;">{{data}}</p>
+</div>
+</body>
+</html>
