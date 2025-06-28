@@ -8,14 +8,11 @@ pipeline {
             }
         }
 
-        stage('Debug: Show Structure') {
+        stage('Verify Dockerfile') {
             steps {
-                dir("${WORKSPACE}") {
-                    sh 'echo "Current workspace: $(pwd)"'
-                    sh 'ls -la'
-                    sh 'ls -la project' // check Dockerfile is there
-                    sh 'cat project/Dockerfile || echo "Dockerfile not found!"'
-                    sh 'docker-compose --version || echo "Docker Compose not found"'
+                dir("${WORKSPACE}/project") {
+                    echo '🔍 Showing Dockerfile content from ./project directory...'
+                    sh 'cat Dockerfile'
                 }
             }
         }
@@ -23,7 +20,7 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 dir("${WORKSPACE}") {
-                    // Use --no-cache to force rebuild with updated Dockerfile
+                    echo '🔨 Building images with --no-cache...'
                     sh 'docker-compose -f docker-compose.yml build --no-cache'
                 }
             }
@@ -32,6 +29,7 @@ pipeline {
         stage('Deploy Containers') {
             steps {
                 dir("${WORKSPACE}") {
+                    echo '🚀 Starting containers...'
                     sh 'docker-compose -f docker-compose.yml up -d'
                 }
             }
@@ -43,7 +41,7 @@ pipeline {
             echo '✅ App deployed successfully at http://localhost:5000'
         }
         failure {
-            echo '❌ Build or deploy failed. Check logs above.'
+            echo '❌ Build or deploy failed. Please check above logs.'
         }
     }
 }
