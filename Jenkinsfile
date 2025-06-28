@@ -8,12 +8,18 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'cd ${WORKSPACE} && docker-compose build'
+                dir("${WORKSPACE}") {
+                    sh 'ls -la'
+                    sh 'docker-compose --version'
+                    sh 'docker-compose -f docker-compose.yml build'
+                }
             }
         }
         stage('Deploy') {
             steps {
-                sh 'cd ${WORKSPACE} && docker-compose up -d'
+                dir("${WORKSPACE}") {
+                    sh 'docker-compose up -d'
+                }
             }
         }
     }
