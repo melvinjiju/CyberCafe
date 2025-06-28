@@ -1,26 +1,22 @@
 pipeline {
     agent any
-
     stages {
-        stage('Clone') {
+        stage('Checkout SCM') {
             steps {
                 checkout scm
             }
         }
-
         stage('Build') {
             steps {
-                sh 'docker-compose build'
+                sh 'cd ${WORKSPACE} && docker-compose build'
             }
         }
-
         stage('Deploy') {
             steps {
-                sh 'docker-compose up -d'
+                sh 'cd ${WORKSPACE} && docker-compose up -d'
             }
         }
     }
-
     post {
         success {
             echo 'App deployed successfully at http://localhost:5000'
