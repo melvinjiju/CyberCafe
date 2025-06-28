@@ -1,4 +1,4 @@
-pipeline {
+ppipeline {
     agent any
     stages {
         stage('Checkout SCM') {
@@ -9,8 +9,8 @@ pipeline {
         stage('Build') {
             steps {
                 dir("${WORKSPACE}") {
+                    sh 'docker-compose --version || echo "Docker Compose not found"'
                     sh 'ls -la'
-                    sh 'docker-compose --version'
                     sh 'docker-compose -f docker-compose.yml build'
                 }
             }
