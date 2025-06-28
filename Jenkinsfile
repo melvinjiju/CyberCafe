@@ -1,35 +1,49 @@
 pipeline {
     agent any
+
     stages {
         stage('Checkout SCM') {
             steps {
                 checkout scm
             }
         }
-        stage('Build') {
+
+        stage('Debug: Show Structure') {
             steps {
                 dir("${WORKSPACE}") {
-                    sh 'pwd'  // Show current directory
-                    sh 'ls -la'  // List all files to confirm docker-compose.yml is present
-                    sh 'docker-compose --version || echo "Docker Compose not found"'  // Check if Docker Compose is available
-                    sh 'docker-compose -f ${WORKSPACE}/docker-compose.yml build'  // Use absolute path
+                    sh 'echo "Current workspace: $(pwd)"'
+                    sh 'ls -la'
+                    sh 'ls -la project' // check Dockerfile is there
+                    sh 'cat project/Dockerfile || echo "Dockerfile not found!"'
+                    sh 'docker-compose --version || echo "Docker Compose not found"'
                 }
             }
         }
-        stage('Deploy') {
+
+        stage('Build Docker Images') {
             steps {
                 dir("${WORKSPACE}") {
-                    sh 'docker-compose -f ${WORKSPACE}/docker-compose.yml up -d'
+                    // Use --no-cache to force rebuild with updated Dockerfile
+                    sh 'docker-compose -f docker-compose.yml build --no-cache'
+                }
+            }
+        }
+
+        stage('Deploy Containers') {
+            steps {
+                dir("${WORKSPACE}") {
+                    sh 'docker-compose -f docker-compose.yml up -d'
                 }
             }
         }
     }
+
     post {
         success {
-            echo 'App deployed successfully at http://localhost:5000'
+            echo '✅ App deployed successfully at http://localhost:5000'
         }
         failure {
-            echo 'Build or deploy failed.'
+            echo '❌ Build or deploy failed. Check logs above.'
         }
     }
 }
